@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/roadcast.api/roadcast.api.csproj" />
+    <Project Path="src/roadcast.application/roadcast.application.csproj" Id="719e199e-b3af-406d-beab-e324bf1d7805" />
+    <Project Path="src/roadcast.domain/roadcast.domain.csproj" Id="6a38023e-174c-404f-8542-b539f1fe05b0" />
+    <Project Path="src/roadcast.infrastructure/roadcast.infrastructure.csproj" Id="9290566f-6cc1-4a48-8368-0fded11a17f7" />
+  </Folder>
+</Solution>

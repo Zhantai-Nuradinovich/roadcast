@@ -1,0 +1,6 @@
+@roadcast_HostAddress = http://localhost:5049
+
+GET {{roadcast_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
