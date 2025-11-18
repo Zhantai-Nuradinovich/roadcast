@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\roadcast.domain\roadcast.domain.csproj" />
-    <ProjectReference Include="..\roadcast.infrastructure\roadcast.infrastructure.csproj" />
+    <ProjectReference Include="..\roadcast.Domain\roadcast.Domain.csproj" />
+    <ProjectReference Include="..\roadcast.Infrastructure\roadcast.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

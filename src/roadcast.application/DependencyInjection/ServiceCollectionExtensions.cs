@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using roadcast.infrastructure.DependencyInjection;
+using roadcast.Infrastructure.DependencyInjection;
 
-namespace roadcast.application.DependencyInjection;
+namespace roadcast.Application.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace roadcast.infrastructure.DependencyInjection;
+namespace roadcast.Infrastructure.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {

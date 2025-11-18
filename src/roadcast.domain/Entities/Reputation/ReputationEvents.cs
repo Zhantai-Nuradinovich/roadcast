@@ -1,4 +1,4 @@
-﻿namespace roadcast.domain.Entities.Reputation;
+﻿namespace roadcast.Domain.Entities.Reputation;
 
 public class ReputationEvents
 {

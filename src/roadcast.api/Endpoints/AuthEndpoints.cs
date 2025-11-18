@@ -1,6 +1,6 @@
-﻿using roadcast.api.Exceptions;
+﻿using roadcast.Api.Exceptions;
 
-namespace roadcast.api.Endpoints;
+namespace roadcast.Api.Endpoints;
 
 public static class AuthEndpoints
 {

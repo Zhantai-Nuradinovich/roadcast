@@ -1,8 +1,8 @@
-﻿using roadcast.api.Exceptions;
+﻿using roadcast.Api.Exceptions;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 
-namespace roadcast.api.Middlewares;
+namespace roadcast.Api.Middlewares;
 
 public class ExceptionHandlerMiddleware
 {

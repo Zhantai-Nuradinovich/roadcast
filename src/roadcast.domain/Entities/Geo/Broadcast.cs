@@ -1,4 +1,4 @@
-﻿namespace roadcast.domain.Entities.Geo;
+﻿namespace roadcast.Domain.Entities.Geo;
 
 public class Broadcast
 {

@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\roadcast.application\roadcast.application.csproj" />
+    <ProjectReference Include="..\roadcast.Application\roadcast.Application.csproj" />
   </ItemGroup>
 
 </Project>

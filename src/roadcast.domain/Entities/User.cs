@@ -1,4 +1,4 @@
-﻿namespace roadcast.domain.Entities;
+﻿namespace roadcast.Domain.Entities;
 
 public class User
 {

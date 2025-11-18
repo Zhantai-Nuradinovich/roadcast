@@ -1,4 +1,4 @@
-﻿namespace roadcast.api.Exceptions;
+﻿namespace roadcast.Api.Exceptions;
 
 public class ServiceErrorException : Exception
 {
