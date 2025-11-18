@@ -6,8 +6,9 @@ public static class ProductEndpoints
 {
     public static void MapProductEndpoints(this IEndpointRouteBuilder builder)
     {
-        var endpoints = builder.MapGroup("api/products")
-            .WithOpenApi();
+        var endpoints = builder
+            .MapGroup("api/products")
+            .WithTags("Products");
 
         endpoints.MapGet(string.Empty, List).WithSummary("Product list");
     }

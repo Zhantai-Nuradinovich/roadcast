@@ -67,6 +67,6 @@ public class ExceptionHandlerMiddleware
                 break;
         }
 
-        return response.WriteAsync(JsonSerializer.Serialize(new { Error = message }));
+        return response.WriteAsync(JsonSerializer.Serialize(new { Error = message, StatusCode = statusCode }));
     }
 }
