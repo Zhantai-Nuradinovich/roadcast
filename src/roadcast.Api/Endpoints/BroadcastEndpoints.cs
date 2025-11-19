@@ -4,7 +4,7 @@ namespace roadcast.Api.Endpoints;
 
 public static class BroadcastEndpoints
 {
-    public static void MapMessageEndpoints(this IEndpointRouteBuilder builder)
+    public static void MapBroadcastEndpoints(this IEndpointRouteBuilder builder)
     {
         var endpoints = builder
             .MapGroup("api/broadcasts")
