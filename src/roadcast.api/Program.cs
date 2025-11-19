@@ -11,7 +11,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplication();
-builder.Services.AddInfrastructure();
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddSignalR();
 
 var app = builder.Build();
@@ -25,8 +25,6 @@ app.MapGeoEndpoints();
 app.MapReputationEndpoints();
 app.MapParkerEndpoints();
 app.MapBroadcastEndpoints();
-
-app.MapProductEndpoints();
 
 app.MapHub<GeoHub>("/hubs/geo");
 app.MapHub<ProximityHub>("/hubs/proximity");

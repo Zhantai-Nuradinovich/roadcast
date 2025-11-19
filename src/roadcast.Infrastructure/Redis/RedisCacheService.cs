@@ -1,8 +1,5 @@
 ﻿using roadcast.Shared.Contracts;
 using StackExchange.Redis;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 
 namespace roadcast.Infrastructure.Redis;

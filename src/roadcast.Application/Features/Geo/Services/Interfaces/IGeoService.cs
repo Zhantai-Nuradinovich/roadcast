@@ -4,6 +4,6 @@ namespace roadcast.Application.Features.Geo.Services.Interfaces;
 
 public interface IGeoService
 {
-    Task UpdateLocationAsync(GeoLocationDto location);
+    Task<string> UpdateLocationAsync(LocationUpdateDto location);
     Task<IEnumerable<GeoLocationDto>> GetNearbyUsersAsync(string userId, double radiusMeters);
 }

@@ -1,4 +1,6 @@
 ﻿using roadcast.Api.Exceptions;
+using roadcast.Application.Features.Geo.Models;
+using roadcast.Application.Features.Geo.Services.Interfaces;
 
 namespace roadcast.Api.Endpoints;
 
@@ -11,20 +13,24 @@ public static class GeoEndpoints
             .WithTags("Geo");
 
         endpoints
-            .MapPost("update", List) // should be web socket
-            .WithSummary("Location update");
+            .MapPost("update", async (LocationUpdateDto dto, IGeoService geoService) =>
+            {
+                await geoService.UpdateLocationAsync(dto);
+                return Results.Ok();
+            })
+            .WithSummary("Update user location");
 
         endpoints
-            .MapGet("nearby?lat={lat}&lng={lng}&radius={radius}&limit={limit}", List)
+            .MapGet("nearby?radius={radius}", async (int radius, IGeoService geoService) =>
+            {
+                // get authenticated user id
+                await geoService.GetNearbyUsersAsync("USERID", radius);
+                return Results.Ok();
+            })
             .WithSummary("Get nearby users");
 
-        endpoints
-            .MapGet("status/{anonId}", List)
-            .WithSummary("Get nearby users");
-    }
-
-    public static async Task<List<string>> List()
-    {
-        throw new ServiceErrorException("testteststsetsetste");
+        //endpoints
+        //    .MapGet("status/{anonId}", List)
+        //    .WithSummary("Get nearby users");
     }
 }

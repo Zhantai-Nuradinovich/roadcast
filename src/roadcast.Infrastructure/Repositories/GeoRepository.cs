@@ -8,6 +8,7 @@ namespace roadcast.Infrastructure.Repositories;
 public class GeoRepository : IGeoRepository
 {
     private readonly IConnectionMultiplexer _redis;
+    // add DB, update if Redis data is expired
     private readonly string _geoIndex = "geo:index";
     private readonly string _geoHashKey = "geo:locations";
 

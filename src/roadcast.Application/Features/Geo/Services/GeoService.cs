@@ -4,6 +4,7 @@ using roadcast.Domain.Entities.Geo;
 using roadcast.Domain.Events;
 using roadcast.Shared.Consts;
 using roadcast.Shared.Contracts;
+using roadcast.Shared.Helpers;
 
 namespace roadcast.Application.Features.Geo.Services;
 
@@ -18,8 +19,10 @@ public class GeoService : IGeoService
         _eventPublisher = eventPublisher;
     }
 
-    public async Task UpdateLocationAsync(GeoLocationDto dto)
+    public async Task<string> UpdateLocationAsync(LocationUpdateDto dto)
     {
+        var geoHash = GeoHashHelper.Encode(dto.Latitude, dto.Longitude);
+        
         var geoLocation = new GeoLocation
         {
             UserId = dto.UserId,
@@ -29,6 +32,7 @@ public class GeoService : IGeoService
             Speed = dto.Speed,
             Heading = dto.Heading,
             Timestamp = DateTime.UtcNow,
+            GeoHash = geoHash
         };
 
         await _repository.UpsertAsync(geoLocation);
@@ -40,8 +44,11 @@ public class GeoService : IGeoService
                 geoLocation.Longitude,
                 geoLocation.Speed,
                 geoLocation.Heading,
-                geoLocation.Timestamp),
+                geoLocation.Timestamp,
+                geoLocation.GeoHash),
             KafkaTopics.GeoLocationUpdated);
+
+        return geoHash;
     }
 
     public async Task<IEnumerable<GeoLocationDto>> GetNearbyUsersAsync(string userId, double radiusMeters)
@@ -58,7 +65,8 @@ public class GeoService : IGeoService
                 x.Longitude,
                 x.Speed,
                 x.Heading,
-                x.Timestamp
+                x.Timestamp,
+                x.GeoHash
             ));
     }
 }

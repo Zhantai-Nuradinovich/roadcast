@@ -8,6 +8,6 @@ public record LocationUpdateDto(
     double Speed,
     double Heading,
     DateTime Timestamp,
-    string GeoHash = null
+    string? GeoHash
 );
 

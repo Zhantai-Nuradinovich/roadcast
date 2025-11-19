@@ -7,6 +7,7 @@ public record GeoLocationDto(
     double Longitude,
     double Speed,
     double Heading,
-    DateTime Timestamp
+    DateTime Timestamp,
+    string? GeoHash
 );
 

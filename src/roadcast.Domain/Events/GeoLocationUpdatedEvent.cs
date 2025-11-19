@@ -8,5 +8,6 @@ public record GeoLocationUpdatedEvent(
     double Longitude,
     double Speed,
     double Heading,
-    DateTime OccurredAt
+    DateTime OccurredAt,
+    string? GeoHash
 ) : IDomainEvent;
