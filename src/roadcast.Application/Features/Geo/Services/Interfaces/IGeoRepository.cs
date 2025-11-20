@@ -6,5 +6,4 @@ public interface IGeoRepository
 {
     Task<GeoLocation?> GetAsync(string userId);
     Task UpsertAsync(GeoLocation location);
-    Task<IEnumerable<GeoLocation?>> GetNearbyUsersAsync(double lat, double lng, double radiusMeters);
 }

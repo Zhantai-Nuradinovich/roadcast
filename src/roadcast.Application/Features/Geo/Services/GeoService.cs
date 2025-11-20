@@ -50,23 +50,4 @@ public class GeoService : IGeoService
 
         return geoHash;
     }
-
-    public async Task<IEnumerable<GeoLocationDto>> GetNearbyUsersAsync(string userId, double radiusMeters)
-    {
-        if (string.IsNullOrEmpty(userId)) throw new ArgumentNullException(nameof(userId));
-        var current = await _repository.GetAsync(userId);
-        if (current == null) return Enumerable.Empty<GeoLocationDto>();
-
-        return (await _repository.GetNearbyUsersAsync(current.Latitude, current.Longitude, radiusMeters))
-            .Select(x => new GeoLocationDto(
-                userId,
-                x.AnonId,
-                x.Latitude,
-                x.Longitude,
-                x.Speed,
-                x.Heading,
-                x.Timestamp,
-                x.GeoHash
-            ));
-    }
 }
