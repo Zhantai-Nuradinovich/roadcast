@@ -10,8 +10,4 @@
     <ProjectReference Include="..\roadcast.Domain\roadcast.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Broadcast\SignalR\" />
-  </ItemGroup>
-
 </Project>
