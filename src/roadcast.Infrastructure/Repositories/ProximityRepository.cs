@@ -1,4 +1,5 @@
-﻿using roadcast.Application.Features.Proximity.Services.Interfaces;
+﻿using roadcast.Application.Features.Proximity.Models;
+using roadcast.Application.Features.Proximity.Services.Interfaces;
 using roadcast.Domain.Entities.Geo;
 using StackExchange.Redis;
 using System.Text.Json;
@@ -8,15 +9,15 @@ namespace roadcast.Infrastructure.Repositories;
 public class ProximityRepository : IProximityRepository
 {
     private readonly IConnectionMultiplexer _redis;
-    private readonly string _proximityIndex = "proximity:index";
-    private readonly string _proximityHashKey = "proximity:locations";
+    private readonly string _proximityIndex = "geo:index";
+    private readonly string _proximityHashKey = "geo:locations";
 
     public ProximityRepository(IConnectionMultiplexer redis)
     {
         _redis = redis;
     }
-    // Geo location to Nearby User - check logic
-    public async Task<IEnumerable<GeoLocation?>> GetNearbyUsersAsync(double lat, double lng, double radiusMeters)
+
+    public async Task<IEnumerable<NearbyUserDto?>> GetNearbyUsersAsync(string userId, double lat, double lng, double radiusMeters)
     {
         var db = _redis.GetDatabase();
 
@@ -25,16 +26,33 @@ public class ProximityRepository : IProximityRepository
             lng,
             lat,
             radiusMeters,
-            GeoUnit.Meters);
+            GeoUnit.Meters,
+            count: 50,
+            order: Order.Ascending,
+            options: GeoRadiusOptions.WithDistance);
 
         if (results == null || results.Length == 0) return [];
 
-        var nearbyIds = results.Select(x => x.Member.ToString()).ToArray();
+        var ids = results.Select(x => x.Member.ToString()).ToArray();
+        var hashValues = await db.HashGetAsync(_proximityHashKey, ids.Select(x => (RedisValue)x).ToArray());
 
-        var hashValues = await db.HashGetAsync(_proximityHashKey, nearbyIds.Select(x => (RedisValue)x).ToArray());
+        return results.Zip(hashValues, (geo, hash) =>
+        {
+            if (!hash.HasValue) return null;
 
-        return hashValues
-            .Where(h => h.HasValue)
-            .Select(h => JsonSerializer.Deserialize<GeoLocation>(h.ToString()));
+            var location = JsonSerializer.Deserialize<GeoLocation>(hash.ToString());
+            return new NearbyUserDto(
+                UserId: location.UserId,
+                AnonId: location.AnonId,
+                Latitude: location.Latitude,
+                Longitude: location.Longitude,
+                DistanceMeters: geo.Distance ?? 0,
+                Speed: location.Speed,
+                Heading: location.Heading,
+                KarmaScore: 0, // place holder before adding profile updates
+                Role: "unknown"
+            );
+        })
+        .Where(x => x != null && x.UserId != userId)!;
     }
 }

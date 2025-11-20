@@ -1,11 +1,13 @@
 ﻿using roadcast.Application.Features.Geo.Models;
 using roadcast.Application.Features.Proximity.Models;
 using roadcast.Application.Features.Proximity.Services.Interfaces;
+using roadcast.Shared.Consts;
 using roadcast.Shared.Contracts;
+using roadcast.Shared.Helpers;
 
 namespace roadcast.Application.Features.Proximity.Services;
 
-public class ProximityService : IProximityService 
+public class ProximityService : IProximityService
 {
     private readonly IProximityRepository _repository;
     private readonly IEventPublisher _eventPublisher;
@@ -15,27 +17,29 @@ public class ProximityService : IProximityService
         _repository = repository;
         _eventPublisher = eventPublisher;
     }
-    public async Task<IEnumerable<NearbyUserDto>> GetNearbyUsersAsync(string userId, double latitude, double longitude, double speed)
+    // geo location updated event -> consumer -> ProcessGeoUpdateAsync
+    public async Task ProcessGeoUpdateAsync(LocationUpdateDto geoLocation)
     {
-        if (string.IsNullOrEmpty(userId)) 
-            throw new ArgumentNullException(nameof(userId));
+        var radius = SpeedToRadiusHelper.GetRadiusBySpeed(geoLocation.Speed);
 
-        return (await _repository.GetNearbyUsersAsync(latitude, longitude, speed)) // GET RAIDUS BY SPEED
-            .Select(x => new NearbyUserDto(
-                userId,
-                x.AnonId,
-                x.Latitude,
-                x.Longitude,
-                x.DistanceMeters,
-                x.Speed,
-                x.Heading,
-                x.KarmaScore,
-                x.Role
-            ));
-    }
+        var nearbyUsers = await _repository.GetNearbyUsersAsync(
+            geoLocation.UserId,
+            geoLocation.Latitude,
+            geoLocation.Longitude,
+            radius
+        );
 
-    public Task ProcessGeoUpdateAsync(LocationUpdateDto geoLocation)
-    {
-        throw new NotImplementedException();
+        if (nearbyUsers == null)
+        {
+            return;
+        }
+
+        var evt = new NearbyUsersFoundEvent(
+            geoLocation.UserId,
+            nearbyUsers!,
+            geoLocation.Timestamp
+        );
+
+        await _eventPublisher.PublishAsync(evt, KafkaTopics.ProximityNearbyUsersFound);
     }
 }

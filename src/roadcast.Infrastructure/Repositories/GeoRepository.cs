@@ -36,26 +36,4 @@ public class GeoRepository : IGeoRepository
         await db.GeoAddAsync(_geoIndex,
             new GeoEntry(location.Longitude, location.Latitude, location.UserId));
     }
-
-    public async Task<IEnumerable<GeoLocation?>> GetNearbyUsersAsync(double lat, double lng, double radiusMeters)
-    {
-        var db = _redis.GetDatabase();
-
-        var results = await db.GeoRadiusAsync(
-            _geoIndex,
-            lng,
-            lat,
-            radiusMeters,
-            GeoUnit.Meters);
-
-        if (results == null || results.Length == 0) return [];
-
-        var nearbyIds = results.Select(x => x.Member.ToString()).ToArray();
-
-        var hashValues = await db.HashGetAsync(_geoHashKey, nearbyIds.Select(x => (RedisValue)x).ToArray());
-
-        return hashValues
-            .Where(h => h.HasValue)
-            .Select(h => JsonSerializer.Deserialize<GeoLocation>(h.ToString()));
-    }
 }
