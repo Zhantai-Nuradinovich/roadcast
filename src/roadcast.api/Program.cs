@@ -1,5 +1,6 @@
 using roadcast.Api.Endpoints;
 using roadcast.Api.Hubs;
+using roadcast.Api.Kafka.Consumers;
 using roadcast.Api.Middlewares;
 using roadcast.Application.DependencyInjection;
 using roadcast.Infrastructure.DependencyInjection;
@@ -13,6 +14,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddSignalR();
+
+builder.Services.AddHostedService<NearbyUsersFoundConsumerService>();
+builder.Services.AddHostedService<GeoLocationUpdatedConsumerService>();
 
 var app = builder.Build();
 
@@ -30,6 +34,7 @@ app.MapHub<GeoHub>("/hubs/geo");
 app.MapHub<ProximityHub>("/hubs/proximity");
 app.MapHub<BroadcastHub>("/hubs/broadcast");
 app.MapHub<ReputationHub>("/hubs/reputation");
+
 
 if (app.Environment.IsDevelopment())
 {

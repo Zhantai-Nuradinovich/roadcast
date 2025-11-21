@@ -1,5 +1,4 @@
-﻿using roadcast.Api.Exceptions;
-using roadcast.Application.Features.Geo.Models;
+﻿using roadcast.Application.Features.Geo.Models;
 using roadcast.Application.Features.Geo.Services.Interfaces;
 
 namespace roadcast.Api.Endpoints;
@@ -20,14 +19,14 @@ public static class GeoEndpoints
             })
             .WithSummary("Update user location");
 
-        endpoints
-            .MapGet("nearby?radius={radius}", async (int radius, IGeoService geoService) =>
-            {
-                // get authenticated user id
-                await geoService.GetNearbyUsersAsync("USERID", radius);
-                return Results.Ok();
-            })
-            .WithSummary("Get nearby users");
+        //endpoints
+        //    .MapGet("nearby?radius={radius}", async (int radius, IProximityService proximityService) =>
+        //    {
+        //        // get authenticated user id
+        //        await proximityService.GetNearbyUsersAsync("USERID", radius);
+        //        return Results.Ok();
+        //    })
+        //    .WithSummary("Get nearby users");
 
         //endpoints
         //    .MapGet("status/{anonId}", List)

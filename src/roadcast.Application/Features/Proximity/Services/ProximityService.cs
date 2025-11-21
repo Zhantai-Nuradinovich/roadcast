@@ -17,7 +17,7 @@ public class ProximityService : IProximityService
         _repository = repository;
         _eventPublisher = eventPublisher;
     }
-    // geo location updated event -> consumer -> ProcessGeoUpdateAsync
+
     public async Task ProcessGeoUpdateAsync(LocationUpdateDto geoLocation)
     {
         var radius = SpeedToRadiusHelper.GetRadiusBySpeed(geoLocation.Speed);

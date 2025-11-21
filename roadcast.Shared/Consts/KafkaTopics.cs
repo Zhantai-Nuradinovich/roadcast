@@ -3,6 +3,7 @@
 public static class KafkaTopics
 {
     public const string GeoLocationUpdated = "geo.location.updated";
+    public const string ProximityGroup = "proximity";
     public const string ProximityNearbyUsersFound = "proximity.nearby-users.found";
     
     public const string UserEnteredProximity = "proximity.user.entered";

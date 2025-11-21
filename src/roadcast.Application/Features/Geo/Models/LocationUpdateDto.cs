@@ -7,7 +7,9 @@ public record LocationUpdateDto(
     double Longitude,
     double Speed,
     double Heading,
-    DateTime Timestamp,
-    string? GeoHash
-);
+    DateTime Timestamp
+)
+{
+    public string? GeoHash { get; set; }
+}
 

@@ -21,8 +21,8 @@ public class GeoService : IGeoService
 
     public async Task<string> UpdateLocationAsync(LocationUpdateDto dto)
     {
-        var geoHash = GeoHashHelper.Encode(dto.Latitude, dto.Longitude);
-        
+        dto.GeoHash = GeoHashHelper.Encode(dto.Latitude, dto.Longitude);
+
         var geoLocation = new GeoLocation
         {
             UserId = dto.UserId,
@@ -32,22 +32,17 @@ public class GeoService : IGeoService
             Speed = dto.Speed,
             Heading = dto.Heading,
             Timestamp = DateTime.UtcNow,
-            GeoHash = geoHash
+            GeoHash = dto.GeoHash
         };
 
         await _repository.UpsertAsync(geoLocation);
 
         await _eventPublisher.PublishAsync(
             new GeoLocationUpdatedEvent(
-                geoLocation.UserId,
-                geoLocation.Latitude,
-                geoLocation.Longitude,
-                geoLocation.Speed,
-                geoLocation.Heading,
-                geoLocation.Timestamp,
-                geoLocation.GeoHash),
+                dto,
+                dto.Timestamp),
             KafkaTopics.GeoLocationUpdated);
 
-        return geoHash;
+        return dto.GeoHash;
     }
 }
