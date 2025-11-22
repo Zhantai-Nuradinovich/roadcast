@@ -1,6 +1,7 @@
 ﻿using Confluent.Kafka;
 using roadcast.Application.Features.Geo.Models;
 using roadcast.Application.Features.Proximity.Services.Interfaces;
+using roadcast.Shared.Consts;
 using System.Text.Json;
 
 namespace roadcast.Api.Kafka.Consumers;
@@ -25,7 +26,7 @@ public class GeoLocationUpdatedConsumerService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        _consumer.Subscribe("GeoLocationUpdatedEvent");
+        _consumer.Subscribe(KafkaTopics.GeoLocationUpdated);
 
         while (!stoppingToken.IsCancellationRequested)
         {

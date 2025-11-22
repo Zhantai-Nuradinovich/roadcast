@@ -1,4 +1,4 @@
-﻿namespace roadcast.Shared.EventBus;
+﻿namespace roadcast.Shared.Contracts;
 
 public interface IDomainEvent
 {

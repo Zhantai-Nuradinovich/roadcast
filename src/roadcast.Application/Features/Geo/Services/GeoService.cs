@@ -1,7 +1,6 @@
 ﻿using roadcast.Application.Features.Geo.Models;
 using roadcast.Application.Features.Geo.Services.Interfaces;
 using roadcast.Domain.Entities.Geo;
-using roadcast.Domain.Events;
 using roadcast.Shared.Consts;
 using roadcast.Shared.Contracts;
 using roadcast.Shared.Helpers;

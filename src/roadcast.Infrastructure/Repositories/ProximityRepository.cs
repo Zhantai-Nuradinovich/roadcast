@@ -49,7 +49,7 @@ public class ProximityRepository : IProximityRepository
                 DistanceMeters: geo.Distance ?? 0,
                 Speed: location.Speed,
                 Heading: location.Heading,
-                KarmaScore: 0, // place holder before adding profile updates
+                KarmaScore: 100, // place holder before adding profile updates
                 Role: "unknown"
             );
         })

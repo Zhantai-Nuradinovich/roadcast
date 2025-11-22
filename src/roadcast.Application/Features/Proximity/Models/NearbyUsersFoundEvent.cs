@@ -1,4 +1,4 @@
-﻿using roadcast.Shared.EventBus;
+﻿using roadcast.Shared.Contracts;
 
 namespace roadcast.Application.Features.Proximity.Models;
 

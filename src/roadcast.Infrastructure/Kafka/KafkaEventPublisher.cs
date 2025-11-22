@@ -1,6 +1,5 @@
 ﻿using Confluent.Kafka;
 using roadcast.Shared.Contracts;
-using roadcast.Shared.EventBus;
 using System.Text.Json;
 
 namespace roadcast.Infrastructure.Kafka;

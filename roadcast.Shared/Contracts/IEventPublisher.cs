@@ -1,6 +1,4 @@
-﻿using roadcast.Shared.EventBus;
-
-namespace roadcast.Shared.Contracts;
+﻿namespace roadcast.Shared.Contracts;
 
 public interface IEventPublisher
 {
