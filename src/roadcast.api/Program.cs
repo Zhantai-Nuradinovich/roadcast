@@ -12,7 +12,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplication();
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration, builder.Environment);
 builder.Services.AddSignalR();
 
 builder.Services.AddHostedService<NearbyUsersFoundConsumerService>();
@@ -32,6 +32,7 @@ app.MapBroadcastEndpoints();
 
 app.MapHub<GeoHub>("/hubs/geo");
 app.MapHub<ProximityHub>("/hubs/proximity");
+app.MapHub<DirectMessageHub>("/hubs/directmessage");
 app.MapHub<BroadcastHub>("/hubs/broadcast");
 app.MapHub<ReputationHub>("/hubs/reputation");
 
