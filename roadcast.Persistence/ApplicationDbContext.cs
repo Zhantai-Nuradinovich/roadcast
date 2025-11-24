@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using roadcast.Application.Features.Identity.Services;
 using roadcast.Domain.Entities.Geo;
 using roadcast.Domain.Entities.Identity;
+using roadcast.Infrastructure.Identity;
 using roadcast.Shared.Common;
 using roadcast.Shared.Contracts;
 
-namespace roadcast.Infrastructure.Identity;
+namespace roadcast.Persistence;
 
-// MOVE TO PERSISTENCE to clean up this layer
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IUserServiceDbContext
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
 {
     private readonly ICurrentUserService? _currentUserService;
 

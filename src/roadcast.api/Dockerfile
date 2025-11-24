@@ -12,19 +12,24 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["roadcast.csproj", "."]
-RUN dotnet restore "./roadcast.csproj"
+COPY ["src/roadcast.Api/roadcast.Api.csproj", "src/roadcast.Api/"]
+COPY ["roadcast.Persistence/roadcast.Persistence.csproj", "roadcast.Persistence/"]
+COPY ["src/roadcast.Application/roadcast.Application.csproj", "src/roadcast.Application/"]
+COPY ["src/roadcast.Domain/roadcast.Domain.csproj", "src/roadcast.Domain/"]
+COPY ["roadcast.Shared/roadcast.Shared.csproj", "roadcast.Shared/"]
+COPY ["src/roadcast.Infrastructure/roadcast.Infrastructure.csproj", "src/roadcast.Infrastructure/"]
+RUN dotnet restore "./src/roadcast.Api/roadcast.Api.csproj"
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "./roadcast.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/src/roadcast.Api"
+RUN dotnet build "./roadcast.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Этот этап используется для публикации проекта службы, который будет скопирован на последний этап
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./roadcast.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./roadcast.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # Этот этап используется в рабочей среде или при запуске из VS в обычном режиме (по умолчанию, когда конфигурация отладки не используется)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "roadcast.dll"]
+ENTRYPOINT ["dotnet", "roadcast.Api.dll"]

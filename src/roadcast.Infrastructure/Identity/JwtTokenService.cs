@@ -13,12 +13,12 @@ namespace roadcast.Infrastructure.Identity;
 public class JwtTokenService : IJwtTokenService
 {
     private readonly JwtOptions _jwtOptions;
-    private readonly IUserServiceDbContext _dbContext;
+    private readonly IApplicationDbContext _dbContext;
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly TokenValidationParameters _tokenValidationParameters;
 
-    public JwtTokenService(JwtOptions jwtOptions, IUserServiceDbContext dbContext,
+    public JwtTokenService(JwtOptions jwtOptions, IApplicationDbContext dbContext,
         RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager,
         TokenValidationParameters tokenValidationParameters)
     {

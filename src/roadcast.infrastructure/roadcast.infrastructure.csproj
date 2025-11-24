@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\roadcast.Application\roadcast.Application.csproj" />
-    <ProjectReference Include="..\roadcast.Domain\roadcast.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

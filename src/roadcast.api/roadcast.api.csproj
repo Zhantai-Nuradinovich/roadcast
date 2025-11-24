@@ -6,7 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>9ce4459a-f821-4e34-8fbf-f1e11a69530d</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>.</DockerfileContext>
+    <DockerfileContext>..\..</DockerfileContext>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\roadcast.Persistence\roadcast.Persistence.csproj" />
     <ProjectReference Include="..\roadcast.Application\roadcast.Application.csproj" />
     <ProjectReference Include="..\roadcast.Infrastructure\roadcast.Infrastructure.csproj" />
   </ItemGroup>

@@ -9,9 +9,9 @@ namespace roadcast.Api.Kafka.Consumers;
 public class GeoLocationUpdatedConsumerService : BackgroundService
 {
     private readonly IConsumer<Null, string> _consumer;
-    private readonly IProximityService _proximityService;
+    private readonly IServiceScopeFactory _scopeFactory;
 
-    public GeoLocationUpdatedConsumerService(IProximityService proximityService)
+    public GeoLocationUpdatedConsumerService(IServiceScopeFactory scopeFactory)
     {
         var config = new ConsumerConfig
         {
@@ -21,7 +21,7 @@ public class GeoLocationUpdatedConsumerService : BackgroundService
         };
 
         _consumer = new ConsumerBuilder<Null, string>(config).Build();
-        _proximityService = proximityService;
+        _scopeFactory = scopeFactory;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -40,7 +40,11 @@ public class GeoLocationUpdatedConsumerService : BackgroundService
                 if (@event is null)
                     continue;
 
-                await _proximityService.ProcessGeoUpdateAsync(@event.locationUpdate);
+                using var scope = _scopeFactory.CreateScope();
+                
+                var proximityService = scope.ServiceProvider.GetRequiredService<IProximityService>();
+                
+                await proximityService.ProcessGeoUpdateAsync(@event.locationUpdate);
             }
             catch (ConsumeException ex)
             {
