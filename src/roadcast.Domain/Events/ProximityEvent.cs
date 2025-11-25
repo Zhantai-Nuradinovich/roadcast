@@ -1,4 +1,4 @@
-﻿using roadcast.Domain.Entities.Proximity;
+﻿using roadcast.Domain.Types;
 
 namespace roadcast.Domain.Events;
 

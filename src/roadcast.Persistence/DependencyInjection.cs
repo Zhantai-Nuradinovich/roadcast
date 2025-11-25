@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using roadcast.Application.Features.Identity.Services;
 using roadcast.Infrastructure.Identity;
+using roadcast.Infrastructure.Identity.Options;
 
 namespace roadcast.Persistence;
 

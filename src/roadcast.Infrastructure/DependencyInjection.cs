@@ -9,6 +9,7 @@ using roadcast.Application.Features.Geo.Services.Interfaces;
 using roadcast.Application.Features.Identity.Services;
 using roadcast.Application.Features.Proximity.Services.Interfaces;
 using roadcast.Infrastructure.Identity;
+using roadcast.Infrastructure.Identity.Options;
 using roadcast.Infrastructure.Kafka;
 using roadcast.Infrastructure.Redis;
 using roadcast.Infrastructure.Repositories;

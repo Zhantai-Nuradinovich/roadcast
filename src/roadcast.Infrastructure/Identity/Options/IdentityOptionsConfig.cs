@@ -1,4 +1,4 @@
-﻿namespace roadcast.Infrastructure.Identity;
+﻿namespace roadcast.Infrastructure.Identity.Options;
 
 public class IdentityOptionsConfig
 {

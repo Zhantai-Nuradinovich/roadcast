@@ -1,4 +1,4 @@
-﻿using roadcast.Domain.Entities.Broadcast;
+﻿using roadcast.Domain.Types;
 
 namespace roadcast.Application.Features.Broadcast.Models;
 

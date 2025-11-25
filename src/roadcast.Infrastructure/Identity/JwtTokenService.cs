@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using roadcast.Application.Features.Identity.Models;
 using roadcast.Application.Features.Identity.Services;
 using roadcast.Domain.Entities.Identity;
+using roadcast.Infrastructure.Identity.Options;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;

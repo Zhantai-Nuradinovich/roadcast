@@ -28,17 +28,12 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionHandlerMiddleware>(app.Environment.IsDevelopment());
 
 app.MapAuthEndpoints();
-app.MapUserEndpoints();
 app.MapGeoEndpoints();
-app.MapReputationEndpoints();
-app.MapParkerEndpoints();
-app.MapBroadcastEndpoints();
 
 app.MapHub<GeoHub>("/hubs/geo");
 app.MapHub<ProximityHub>("/hubs/proximity");
 app.MapHub<DirectMessageHub>("/hubs/directmessage");
 app.MapHub<BroadcastHub>("/hubs/broadcast");
-app.MapHub<ReputationHub>("/hubs/reputation");
 
 if (builder.Configuration.GetValue<bool>("UseDatabaseInitializer"))
 {
