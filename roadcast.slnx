@@ -1,11 +1,14 @@
 <Solution>
+  <Folder Name="/docs/">
+    <File Path="README.md" />
+  </Folder>
   <Folder Name="/src/">
-    <Project Path="src/roadcast.Persistence/roadcast.Persistence.csproj" Id="31ad5f0b-72c8-4809-a254-6f562e42d561" />
-    <Project Path="src/roadcast.Shared/roadcast.Shared.csproj" Id="21a01e0a-f867-40bf-b49f-6d15101582a4" />
     <Project Path="src/roadcast.Api/roadcast.Api.csproj" />
     <Project Path="src/roadcast.Application/roadcast.Application.csproj" Id="719e199e-b3af-406d-beab-e324bf1d7805" />
     <Project Path="src/roadcast.Domain/roadcast.Domain.csproj" Id="6a38023e-174c-404f-8542-b539f1fe05b0" />
     <Project Path="src/roadcast.Infrastructure/roadcast.Infrastructure.csproj" Id="9290566f-6cc1-4a48-8368-0fded11a17f7" />
+    <Project Path="src/roadcast.Persistence/roadcast.Persistence.csproj" Id="31ad5f0b-72c8-4809-a254-6f562e42d561" />
+    <Project Path="src/roadcast.Shared/roadcast.Shared.csproj" Id="21a01e0a-f867-40bf-b49f-6d15101582a4" />
   </Folder>
   <Project Path="docker-compose.dcproj">
     <Build />
