@@ -11,7 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\roadcast.Shared\roadcast.Shared.csproj" />
+	  <ProjectReference Include="..\roadcast.Shared\roadcast.Shared.csproj" />
 	</ItemGroup>
 	
 </Project>
