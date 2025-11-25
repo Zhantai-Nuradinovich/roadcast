@@ -12,12 +12,12 @@ public class NearbyUsersFoundConsumerService : BackgroundService
     private readonly IConsumer<Null, string> _consumer;
     private readonly IHubContext<ProximityHub> _hubContext;
 
-    public NearbyUsersFoundConsumerService(IHubContext<ProximityHub> hubContext)
+    public NearbyUsersFoundConsumerService(IHubContext<ProximityHub> hubContext, IConfiguration configuration)
     {
         var config = new ConsumerConfig
         {
             GroupId = KafkaTopics.ProximityGroup,
-            BootstrapServers = "localhost:9092",
+            BootstrapServers = configuration["Kafka:BootstrapServers"],
             AutoOffsetReset = AutoOffsetReset.Earliest
         };
 

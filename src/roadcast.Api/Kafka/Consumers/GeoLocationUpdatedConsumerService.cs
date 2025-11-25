@@ -11,12 +11,12 @@ public class GeoLocationUpdatedConsumerService : BackgroundService
     private readonly IConsumer<Null, string> _consumer;
     private readonly IServiceScopeFactory _scopeFactory;
 
-    public GeoLocationUpdatedConsumerService(IServiceScopeFactory scopeFactory)
+    public GeoLocationUpdatedConsumerService(IServiceScopeFactory scopeFactory, IConfiguration configuration)
     {
         var config = new ConsumerConfig
         {
             GroupId = "geo-location-updated-consumers",
-            BootstrapServers = "localhost:9092",
+            BootstrapServers = configuration["Kafka:BootstrapServers"],
             AutoOffsetReset = AutoOffsetReset.Earliest
         };
 

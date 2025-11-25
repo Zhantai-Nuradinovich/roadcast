@@ -40,6 +40,10 @@ app.MapHub<DirectMessageHub>("/hubs/directmessage");
 app.MapHub<BroadcastHub>("/hubs/broadcast");
 app.MapHub<ReputationHub>("/hubs/reputation");
 
+if (builder.Configuration.GetValue<bool>("UseDatabaseInitializer"))
+{
+    app.UseInitializeDatabase();
+}
 
 if (app.Environment.IsDevelopment())
 {
